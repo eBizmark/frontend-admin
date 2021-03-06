@@ -82,16 +82,16 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { ref } from "vue";
 
-export default defineComponent({
+export default {
   setup() {
     const open = ref(false);
     return {
       open,
     };
   },
-});
+}
 </script>
 
 <style>

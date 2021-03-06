@@ -74,10 +74,10 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import  {ref } from "vue";
 import { useRouter } from "vue-router";
 
-export default defineComponent({
+export default{
   setup() {
     const router = useRouter();
     const email = ref("johndoe@mail.com");
@@ -93,5 +93,5 @@ export default defineComponent({
       password,
     };
   },
-});
+}
 </script>

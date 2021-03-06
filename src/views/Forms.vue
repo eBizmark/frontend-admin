@@ -143,19 +143,12 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script>
+import { ref } from "vue";
 
-interface User {
-  username: string;
-  email: string;
-  password: string;
-  confirm: string;
-}
-
-export default defineComponent({
+export default {
   setup() {
-    const user = ref<User>({
+    const user = ref({
       username: "",
       email: "",
       password: "",
@@ -172,5 +165,5 @@ export default defineComponent({
       register,
     };
   },
-});
+}
 </script>

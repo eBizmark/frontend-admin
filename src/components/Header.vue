@@ -105,11 +105,11 @@
   </header>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent, ref } from "vue";
 import { useSidebar } from "../hooks/useSidebar";
 
-export default defineComponent({
+export default{
   setup(_, { emit }) {
     const dropdownOpen = ref(false);
     const { isOpen } = useSidebar();
@@ -119,5 +119,5 @@ export default defineComponent({
       dropdownOpen,
     };
   },
-});
+}
 </script>

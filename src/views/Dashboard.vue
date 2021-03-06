@@ -44,7 +44,7 @@
 
             <div class="mx-5">
               <h4 class="text-2xl font-semibold text-gray-700">8,282</h4>
-              <div class="text-gray-500">New Users</div>
+              <div class="text-gray-500">Event</div>
             </div>
           </div>
         </div>
@@ -218,34 +218,46 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-
-interface User {
-  name: string;
-  email: string;
-  title: string;
-  title2: string;
-  status: string;
-  role: string;
-}
-
-export default defineComponent({
+<script>
+import { ref } from "vue";
+export default {
   setup() {
-    const testUser: User = {
+    let dataUser = [{
       name: "John Doe",
       email: "john@example.com",
       title: "Software Engineer",
       title2: "Web dev",
       status: "Active",
       role: "Owner",
-    };
-
-    const users = ref<User[]>([...Array(10).keys()].map(() => testUser));
-
+    },
+    {
+      name: "John Doe",
+      email: "john@example.com",
+      title: "Software Engineer",
+      title2: "Web dev",
+      status: "Active",
+      role: "Owner",
+    },
+    {
+      name: "John Doe",
+      email: "john@example.com",
+      title: "Software Engineer",
+      title2: "Web dev",
+      status: "Active",
+      role: "Owner",
+    },
+    {
+      name: "John Doxe",
+      email: "john@example.com",
+      title: "Software Engineer",
+      title2: "Web dev",
+      status: "Active",
+      role: "Owner",
+    }];
+    let users = ref(dataUser);
     return {
-      users,
+      users
     };
-  },
-});
+  }
+}
 </script>

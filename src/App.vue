@@ -3,14 +3,11 @@
     <router-view />
   </component>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, computed } from "vue";
-import { useRouter } from "vue-router";
-
+<script>
+import { defineComponent, ref, computed } from "vue"
+import { useRouter } from "vue-router"
 const defaultLayout = "default";
-
-export default defineComponent({
+export default {
   setup() {
     const { currentRoute } = useRouter();
 
@@ -21,6 +18,6 @@ export default defineComponent({
     return {
       layout,
     };
-  },
-});
+  }
+}
 </script>
