@@ -1,14 +1,17 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import './assets/main.css'
-import router from './router'
-import DashboardLayout from './components/DashboardLayout.vue'
-import EmptyLayout from './components/EmptyLayout.vue'
-
-
+import http from './http';
+import '@/assets/css/app.css'
+import router from '@/router'
+// Untuk State Management Store pake tutorial : https://youtu.be/a8s7Vx0oMmI?t=179
+// Bakal mirip kaya Nuthink dulu
+import App from '@/App.vue'
+import DashboardLayout from '@/components/DashboardLayout.vue'
+import EmptyLayout from '@/components/EmptyLayout.vue'
 
 const app = createApp(App)
-app.component('default-layout', DashboardLayout);
-app.component('empty-layout', EmptyLayout);
-app.use(router)
-app.mount('#app')
+app
+.component('default-layout', DashboardLayout)
+.component('empty-layout', EmptyLayout)
+.use(router)
+.use(http)
+.mount('#app')

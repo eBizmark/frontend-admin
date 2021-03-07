@@ -110,7 +110,7 @@ export default defineComponent({
       nama: "irvan"
     }]);
     const getEvents = async()=>{
-      let {data} = await axios.get("http://localhost:3333/event")
+      let {data} = await axios.get("/event")
       events.value = data;
     }
     onMounted(()=>{

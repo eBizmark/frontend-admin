@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "./views/Dashboard.vue";
-import Event from "./views/Event/index.vue";
-import Forms from "./views/Forms.vue";
-import Tables from "./views/Tables.vue";
-import UIElements from "./views/UIElements.vue";
-import Login from "./views/Login.vue";
-import Modal from "./views/Modal.vue";
-import Card from "./views/Card.vue";
-import Blank from "./views/Blank.vue";
+import Dashboard from "@/pages/Dashboard.vue";
+import Event from "@/pages/Event/index.vue";
+import Forms from "@/pages/Forms.vue";
+import Tables from "@/pages/Tables.vue";
+import UIElements from "@/pages/UIElements.vue";
+import Login from "@/pages/Login.vue";
+import Modal from "@/pages/Modal.vue";
+import Card from "@/pages/Card.vue";
+import Blank from "@/pages/Blank.vue";
 const routes = [
     {
         path: "/",
