@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import http from './http';
-import '@/assets/css/app.css'
+import './assets/css/app.css'
 import router from '@/router'
 // Untuk State Management Store pake tutorial : https://youtu.be/a8s7Vx0oMmI?t=179
 // Bakal mirip kaya Nuthink dulu
