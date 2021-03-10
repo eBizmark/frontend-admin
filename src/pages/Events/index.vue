@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h3 class="text-gray-700 text-3xl font-medium">Event Seminar</h3>
+
+    <div class="flex justify-between items-center">
+      <div class="flex justify-start">
+        <h3 class="text-gray-700 text-3xl font-medium">Event Seminar</h3>
+      </div>
+
+      <div class="flex justify-end">
+        <a href="#" class="bg-indigo-600 hover:bg-indigo-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-4 rounded-lg">Tambah Event</a>
+      </div>
+    </div>
 
     <div class="mt-8"></div>
 
@@ -35,7 +44,7 @@
                 <th
                   class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Maks Peserta
+                  Max Peserta
                 </th>
                 <th
                   class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
@@ -82,7 +91,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
+                    <div class="text-sm leading-5 font-medium text-gray-900 ml-0 2xl:ml-3 xl:ml-2 lg:ml-1">
                       <li v-for="(p,index) in e.pemateri" :key="index">
                         <ul>{{ p }}</ul>
                       </li>
@@ -90,7 +99,8 @@
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                  <a href="#" class="bg-gray-200 hover:bg-indigo-600 hover:text-white border border-gray-200 text-indigo-600 font-bold py-2 px-6 rounded-lg">Edit</a>
+                  <a href="#" class="bg-gray-200 hover:bg-red-600 hover:text-white border border-gray-200 text-red-600 font-bold py-2 px-4 rounded-lg ml-4">Delete</a>
                 </td>
               </tr>
             </tbody>
@@ -103,18 +113,27 @@
 
 <script>
 import axios from "axios"
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const events = ref([]);
+    const event = reactive({
+        "id": null,
+        "nama": "",
+        "tanggal": "",
+        "maksPeserta": "",
+        "pemateri": [],
+        "kategori": ""
+    });
+
+    const events = ref([event]);
 
     const getEvents = async()=>{
-      let {data} = await axios.get("/event")
+      let { data } = await axios.get("/event");
       events.value = data;
     }
 
     onMounted(()=>{
-      getEvents()
+      getEvents();
     })
 
     return{

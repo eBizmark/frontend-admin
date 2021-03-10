@@ -46,7 +46,7 @@
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(p, index) in peserta" :key="index">
+              <tr v-for="(p, index) in participants" :key="index">
                 <td class="pl-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <span class="inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                     {{ index+1 }}
@@ -101,22 +101,31 @@
 
 <script>
 import axios from "axios"
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const peserta = ref([]);
+    const participant = reactive({
+        "id": null,
+        "nama": "",
+        "email": "",
+        "tglLahir": "",
+        "noHP": "",
+        "domisili": ""
+    });
 
-    const getEvents = async()=>{
-      let {data} = await axios.get("/peserta")
-      peserta.value = data;
+    const participants = ref([participant]);
+
+    const getParticipants = async()=>{
+      let { data } = await axios.get("/peserta");
+      participants.value = data;
     }
 
     onMounted(()=>{
-      getEvents()
+      getParticipants();
     })
 
     return{
-      peserta
+      participants
     }
   },
 });
