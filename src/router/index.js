@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "@/pages/Dashboard.vue";
-import Event from "@/pages/Event/index.vue";
+import Events from "@/pages/Events/index.vue";
+import Peserta from "@/pages/Peserta/index.vue";
 import Forms from "@/pages/Forms.vue";
 import Tables from "@/pages/Tables.vue";
 import UIElements from "@/pages/UIElements.vue";
@@ -21,9 +22,14 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: "/event",
-        name: "Event",
-        component: Event,
+        path: "/events",
+        name: "Events",
+        component: Events,
+      },
+      {
+        path: "/peserta",
+        name: "Peserta",
+        component: Peserta,
       },
       {
         path: "/forms",
