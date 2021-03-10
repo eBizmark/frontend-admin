@@ -75,7 +75,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900 ml-3 lg:ml-8 md:ml-5 sm:ml-4">
+                    <div class="text-sm leading-5 font-medium text-gray-900 ml-3 2xl:ml-8 xl:ml-7 lg:ml-6 md:ml-5 sm:ml-4">
                         {{ e.maksPeserta }}
                       </div>
                   </div>
