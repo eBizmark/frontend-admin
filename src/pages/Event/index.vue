@@ -75,7 +75,7 @@
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
+                    <div class="text-sm leading-5 font-medium text-gray-900 ml-3 lg:ml-8 md:ml-5 sm:ml-4">
                         {{ e.maksPeserta }}
                       </div>
                   </div>
@@ -106,13 +106,13 @@ import axios from "axios"
 import { defineComponent, ref, onMounted } from "vue";
 export default defineComponent({
   setup() {
-    const events = ref([{
-      nama: "irvan"
-    }]);
+    const events = ref([]);
+
     const getEvents = async()=>{
       let {data} = await axios.get("/event")
       events.value = data;
     }
+
     onMounted(()=>{
       getEvents()
     })
