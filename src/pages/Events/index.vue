@@ -3,7 +3,7 @@
 
     <div class="flex justify-between items-center">
       <div class="flex justify-start">
-        <h3 class="text-gray-700 text-3xl font-medium">Event Seminar</h3>
+        <h3 class="text-gray-700 text-3xl font-medium">Daftar Events</h3>
       </div>
 
       <div class="flex justify-end">
@@ -55,7 +55,7 @@
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(e, index) in events" :key="index">
+              <tr v-for="(acara, index) in dataAcara" :key="index">
                 <td class="pl-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <span class="inline-flex text-xs leading-5 font-semibold rounded-full">
                     {{ index+1 }}.
@@ -64,47 +64,47 @@
                 <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ e.nama }}
+                        {{ acara.nama }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ e.kategori }}
+                        {{ acara.kategori }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ e.tanggal }}
+                        {{ acara.tanggal }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900 ml-3 2xl:ml-8 xl:ml-7 lg:ml-6 md:ml-5 sm:ml-4">
-                        {{ e.maksPeserta }}
+                        {{ acara.maksPeserta }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                      <div v-for="(p,index) in e.pemateri" :key="index">
+                      <div v-for="(pemateri,index) in acara.pemateri" :key="index">
                           <div class="flex items-center">
                             <div class="flex-shrink-0 w-10 h-10">
                               <img
                               class="w-full h-full rounded-full"
-                              :src="p.foto"
+                              :src="pemateri.foto"
                               alt
                               />
                             </div>
 
                             <div class="ml-3">
                               <p class="text-gray-900 whitespace-no-wrap">
-                                {{ p.nama }}
+                                {{ pemateri.nama }}
                               </p>
                             </div>
                           </div>
@@ -130,7 +130,7 @@ import axios from "axios"
 import { defineComponent, ref, onMounted, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const event = reactive({
+    const acara = reactive({
         "id": null,
         "nama": "",
         "tanggal": "",
@@ -145,19 +145,19 @@ export default defineComponent({
         "kategori": ""
     });
 
-    const events = ref([event]);
+    const dataAcara = ref([acara]);
 
-    const getEvents = async()=>{
+    const getDataAcara = async()=>{
       let { data } = await axios.get("/event");
-      events.value = data;
+      dataAcara.value = data;
     }
 
     onMounted(()=>{
-      getEvents();
+      getDataAcara();
     })
 
     return{
-      events
+      dataAcara
     }
   },
 });

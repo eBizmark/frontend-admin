@@ -51,7 +51,7 @@
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(p, index) in participants" :key="index">
+              <tr v-for="(pemesan, index) in dataPemesan" :key="index">
                 <td class="pl-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <span class="inline-flex text-xs leading-5 font-semibold rounded-full">
                     {{ index+1 }}.
@@ -60,42 +60,42 @@
                 <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ p.nama }}
+                        {{ pemesan.nama }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ p.email }}
+                        {{ pemesan.email }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ p.tglLahir }}
+                        {{ pemesan.tglLahir }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ p.noHP }}
+                        {{ pemesan.noHP }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ p.domisili }}
+                        {{ pemesan.domisili }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ p.referalCode }}
+                        {{ pemesan.referalCode }}
                       </div>
                   </div>
                 </td>
@@ -118,7 +118,7 @@ import axios from "axios"
 import { defineComponent, ref, onMounted, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const participant = reactive({
+    const pemesan = reactive({
         "id": null,
         "nama": "",
         "email": "",
@@ -136,19 +136,19 @@ export default defineComponent({
             }]
     });
 
-    const participants = ref([participant]);
+    const dataPemesan = ref([pemesan]);
 
-    const getParticipants = async()=>{
+    const getDataPemesan = async()=>{
       let { data } = await axios.get("/pemesan");
-      participants.value = data;
+      dataPemesan.value = data;
     }
 
     onMounted(()=>{
-      getParticipants();
+      getDataPemesan();
     })
 
     return{
-      participants
+      dataPemesan
     }
   },
 });
