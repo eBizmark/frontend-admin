@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-gray-700 text-3xl font-medium">Peserta Seminar</h3>
+    <h3 class="text-gray-700 text-3xl font-medium">Sertifikat</h3>
 
     <div class="mt-8"></div>
 
@@ -20,38 +20,23 @@
                 <th
                   class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Event
-                </th>
-                <th
-                  class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Nama Peserta
+                  Nama Event
                 </th>
                 <th
                   class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Email
+                  Tanggal Event
                 </th>
                 <th
                   class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Tanggal Lahir
-                </th>
-                <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  No. HP
-                </th>
-                <th
-                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Domisili
+                  Template
                 </th>
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(peserta, index) in dataPeserta" :key="index">
+              <tr v-for="(sertifikat, index) in dataSertifikat" :key="index">
                 <td class="pl-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <span class="inline-flex text-xs leading-5 font-semibold rounded-full">
                     {{ index+1 }}.
@@ -60,47 +45,39 @@
                 <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.event }}
-                      </div>
-                  </div>
-                </td>
-                <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.nama }}
+                        {{ sertifikat.seminar.nama }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.email }}
+                        {{ sertifikat.seminar.tanggal }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.tglLahir }}
-                      </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.noHP }}
-                      </div>
-                  </div>
-                </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.domisili }}
-                      </div>
+                    <div class="flex-shrink-0 w-20 h-15">
+                      <a href="#">
+                        <div @click="openImage(sertifikat.template)">
+                          <img
+                            class="w-full h-full"
+                            :src="sertifikat.template"
+                            alt
+                          />
+                        </div>
+                      </a>
+                    </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                  <a href="#" class="bg-gray-200 hover:bg-indigo-600 hover:text-white border border-gray-200 text-indigo-600 font-bold py-2 px-6 rounded-lg">Edit</a>
+                  <div v-if="sertifikat.template === ''">
+                      <a href="#" class="bg-red-600 hover:bg-red-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-4 rounded-lg">Not Uploaded</a>
+                  </div>
+                  <div v-else>
+                    <a href="#" class="bg-green-600 hover:bg-green-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-7 rounded-lg">Uploaded</a>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -116,28 +93,39 @@ import axios from "axios"
 import { defineComponent, ref, onMounted, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const peserta = reactive({
+    const sertifikat = reactive({
         "id": null,
-        "nama": "",
-        "email": "",
-        "tglLahir": "",
-        "noHP": "",
-        "domisili": ""
+        "seminar" :{
+            "id": null,
+            "nama": "",
+            "tanggal": "",
+            "pemateri": [],
+            "kategori": {
+                "id": null,
+                "nama": ""
+            }
+        },
+        "template": ""
     });
 
-    const dataPeserta = ref([peserta]);
+    const dataSertifikat = ref([sertifikat]);
 
-    const getDataPeserta = async()=>{
-      let { data } = await axios.get("/peserta");
-      dataPeserta.value = data;
+    const getDataSertifikat = async()=>{
+      let { data } = await axios.get("/sertifikat");
+      dataSertifikat.value = data;
     }
 
     onMounted(()=>{
-      getDataPeserta();
+      getDataSertifikat();
     })
 
+    const openImage = (url) => {
+      window.open(url);
+    };
+
     return{
-      dataPeserta
+      dataSertifikat,
+      openImage
     }
   },
 });

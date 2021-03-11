@@ -102,7 +102,6 @@
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                   <a href="#" class="bg-gray-200 hover:bg-green-600 hover:text-white border border-gray-200 text-green-600 font-bold py-2 px-4 rounded-lg">Detail</a>
                   <a href="#" class="bg-gray-200 hover:bg-indigo-600 hover:text-white border border-gray-200 text-indigo-600 font-bold py-2 px-6 rounded-lg ml-4">Edit</a>
-                  <a href="#" class="bg-gray-200 hover:bg-red-600 hover:text-white border border-gray-200 text-red-600 font-bold py-2 px-4 rounded-lg ml-4">Delete</a>
                 </td>
               </tr>
             </tbody>

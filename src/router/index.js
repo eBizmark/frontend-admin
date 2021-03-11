@@ -7,6 +7,7 @@ import Kategori from "@/pages/Kategori/index.vue";
 import Transaksi from "@/pages/Transaksi/index.vue";
 import Vouchers from "@/pages/Vouchers/index.vue";
 import Tiket from "@/pages/Tiket/index.vue";
+import Sertifikat from "@/pages/Sertifikat/index.vue";
 import Forms from "@/pages/Forms.vue";
 import Tables from "@/pages/Tables.vue";
 import UIElements from "@/pages/UIElements.vue";
@@ -60,6 +61,11 @@ const routes = [
         path: "/tickets",
         name: "Tiket",
         component: Tiket,
+      },
+      {
+        path: "/certificates",
+        name: "Sertifikat",
+        component: Sertifikat,
       },
       {
         path: "/forms",
