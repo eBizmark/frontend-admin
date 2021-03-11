@@ -5,6 +5,7 @@ import Participants from "@/pages/Participants/index.vue";
 import Bookers from "@/pages/Bookers/index.vue";
 import Kategori from "@/pages/Kategori/index.vue";
 import Transaksi from "@/pages/Transaksi/index.vue";
+import Vouchers from "@/pages/Vouchers/index.vue";
 import Forms from "@/pages/Forms.vue";
 import Tables from "@/pages/Tables.vue";
 import UIElements from "@/pages/UIElements.vue";
@@ -48,6 +49,11 @@ const routes = [
         path: "/transactions",
         name: "Transaksi",
         component: Transaksi,
+      },
+      {
+        path: "/vouchers",
+        name: "Vouchers",
+        component: Vouchers,
       },
       {
         path: "/forms",
