@@ -8,6 +8,7 @@ import Transaksi from "@/pages/Transaksi/index.vue";
 import Vouchers from "@/pages/Vouchers/index.vue";
 import Tiket from "@/pages/Tiket/index.vue";
 import Sertifikat from "@/pages/Sertifikat/index.vue";
+import Pemateri from "@/pages/Pemateri/index.vue";
 import Forms from "@/pages/Forms.vue";
 import Tables from "@/pages/Tables.vue";
 import UIElements from "@/pages/UIElements.vue";
@@ -53,19 +54,24 @@ const routes = [
         component: Transaksi,
       },
       {
-        path: "/vouchers",
-        name: "Vouchers",
-        component: Vouchers,
-      },
-      {
         path: "/tickets",
         name: "Tiket",
         component: Tiket,
       },
       {
+        path: "/vouchers",
+        name: "Vouchers",
+        component: Vouchers,
+      },
+      {
         path: "/certificates",
         name: "Sertifikat",
         component: Sertifikat,
+      },
+      {
+        path: "/pemateri",
+        name: "Pemateri",
+        component: Pemateri,
       },
       {
         path: "/forms",

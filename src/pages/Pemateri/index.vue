@@ -1,6 +1,15 @@
 <template>
   <div>
-    <h3 class="text-gray-700 text-3xl font-medium">Sertifikat</h3>
+
+    <div class="flex justify-between items-center">
+      <div class="flex justify-start">
+        <h3 class="text-gray-700 text-3xl font-medium">Daftar Pemateri</h3>
+      </div>
+
+      <div class="flex justify-end">
+        <a href="#" class="bg-indigo-600 hover:bg-indigo-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-4 rounded-lg">Tambah Pemateri</a>
+      </div>
+    </div>
 
     <div class="mt-8"></div>
 
@@ -20,23 +29,23 @@
                 <th
                   class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Nama Event
+                  Nama Pemateri
                 </th>
                 <th
                   class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Tanggal Event
+                  Foto
                 </th>
                 <th
                   class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Template
+                  Deskripsi
                 </th>
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(sertifikat, index) in dataSertifikat" :key="index">
+              <tr v-for="(pemateri, index) in dataPemateri" :key="index">
                 <td class="pl-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <span class="inline-flex text-xs leading-5 font-semibold rounded-full">
                     {{ index+1 }}.
@@ -45,25 +54,18 @@
                 <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ sertifikat.seminar.nama }}
+                        {{ pemateri.nama }}
                       </div>
                   </div>
                 </td>
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ sertifikat.seminar.tanggal }}
-                      </div>
-                  </div>
-                </td>
-                <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-200">
+                <td class="py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-20 h-15">
                       <a href="#">
-                        <div @click="openImage(sertifikat.template)">
+                        <div @click="openImage(pemateri.foto)">
                           <img
-                            class="w-full h-full"
-                            :src="sertifikat.template"
+                            class="w-full h-full rounded-full"
+                            :src="pemateri.foto"
                             alt
                           />
                         </div>
@@ -71,13 +73,16 @@
                     </div>
                   </div>
                 </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                  <div class="flex items-center">
+                    <div class="text-sm leading-5 font-medium text-gray-900">
+                        {{ pemateri.deskripsi }}
+                      </div>
+                  </div>
+                </td>
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                  <div v-if="sertifikat.template === ''">
-                      <a href="#" class="bg-red-600 hover:bg-red-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-4 rounded-lg">Not Uploaded</a>
-                  </div>
-                  <div v-else>
-                    <a href="#" class="bg-green-600 hover:bg-green-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-7 rounded-lg">Uploaded</a>
-                  </div>
+                  <a href="#" class="bg-gray-200 hover:bg-indigo-600 hover:text-white border border-gray-200 text-indigo-600 font-bold py-2 px-6 rounded-lg">Edit</a>
+                  <a href="#" class="bg-gray-200 hover:bg-red-600 hover:text-white border border-gray-200 text-red-600 font-bold py-2 px-4 rounded-lg ml-4">Delete</a>
                 </td>
               </tr>
             </tbody>
@@ -93,30 +98,22 @@ import axios from "axios"
 import { defineComponent, ref, onMounted, reactive } from "vue";
 export default defineComponent({
   setup() {
-    const sertifikat = reactive({
-        "id": null,
-        "seminar" :{
+    const pemateri = reactive({
             "id": null,
             "nama": "",
-            "tanggal": "",
-            "pemateri": [],
-            "kategori": {
-                "id": null,
-                "nama": ""
-            }
-        },
-        "template": ""
-    });
+            "foto": "",
+            "deskripsi": ""
+        });
 
-    const dataSertifikat = ref([sertifikat]);
+    const dataPemateri = ref([pemateri]);
 
-    const getDataSertifikat = async()=>{
-      let { data } = await axios.get("/sertifikat");
-      dataSertifikat.value = data;
+    const getDataPemateri = async()=>{
+      let { data } = await axios.get("/pemateri");
+      dataPemateri.value = data;
     }
 
     onMounted(()=>{
-      getDataSertifikat();
+      getDataPemateri();
     })
 
     const openImage = (url) => {
@@ -124,7 +121,7 @@ export default defineComponent({
     };
 
     return{
-      dataSertifikat,
+      dataPemateri,
       openImage
     }
   },
