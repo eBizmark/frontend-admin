@@ -32,6 +32,10 @@
                 >
                   Template
                 </th>
+                <th
+                  class="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                >
+                </th>
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
@@ -71,12 +75,20 @@
                     </div>
                   </div>
                 </td>
+                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                  <div class="flex items-center">
+                    <div class="text-sm leading-5 font-medium text-gray-900">
+                        <input type="file" ref="image" name="image" class="ml-4" id="image">
+                      </div>
+                  </div>
+                </td>
                 <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                   <div v-if="sertifikat.template === ''">
-                      <a href="#" class="bg-red-600 hover:bg-red-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-4 rounded-lg">Not Uploaded</a>
+                    <!-- <a href="#" class="bg-red-600 hover:bg-red-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-4 rounded-lg">No Template</a> -->
                   </div>
                   <div v-else>
-                    <a href="#" class="bg-green-600 hover:bg-green-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-7 rounded-lg">Uploaded</a>
+                    <a href="#" class="bg-indigo-600 hover:bg-indigo-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-3 rounded-lg">Kirim Sertifikat</a>
+                    <a href="#" class="bg-red-600 hover:bg-red-400 hover:text-white border border-gray-200 text-gray-200 font-bold py-2 px-8 rounded-lg ml-4">Delete</a>
                   </div>
                 </td>
               </tr>
