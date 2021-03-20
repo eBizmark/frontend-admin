@@ -140,6 +140,7 @@
                                 <div class="inline-block relative w-64">
                                     <litepie-datepicker
                                         as-single
+                                        :formatter="formatter"
                                         v-model="dateValue"
                                     ></litepie-datepicker>
                                 </div>
@@ -497,6 +498,11 @@ export default defineComponent({
 
         const open = ref(false);
         const dateValue = ref([]);
+        const formatter = reactive({
+          date: 'DD MMM YYYY',
+          month: 'MMM'
+        })
+
         return {
             dataAcara,
             dataKategori,
@@ -505,7 +511,8 @@ export default defineComponent({
             increaseNumber,
             decreaseNumber,
             open,
-            dateValue
+            dateValue,
+            formatter
         };
     }
 });
