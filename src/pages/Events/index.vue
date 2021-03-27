@@ -26,7 +26,7 @@
                 ></div>
 
                 <div
-                    class="modal-container fixed bg-white w-1/8 2xl:w-1/3 md:w-1/2 sm:w-1/7 mx-auto h-1/7 xl:h-1/2 md:h-1/3 sm:h-1/4 rounded shadow-lg z-50 overflow-y-auto"
+                    class="modal-container fixed bg-white w-1/8 md:w-1/3 sm:w-1/7 mx-auto h-1/7 xl:h-1/2 md:h-1/3 sm:h-1/4 rounded shadow-lg z-50 overflow-y-auto"
                 >
                     <div
                         class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- Add margin if you want to see some of the overlay behind the modal-->
-                    <div class="modal-content py-4 text-left px-6">
+                    <div class="modal-content py-4 text-left px-8">
                         <!--Title-->
                         <div class="flex justify-between items-center pb-3">
                             <p class="text-2xl font-bold">Buat Event</p>
@@ -69,12 +69,12 @@
                         </div>
 
                         <!--Body-->
-                        <form class="w-full max-w-lg" @submit.prevent>
+                        <form class="w-full max-w-lg lg:ml-9 lg:mt-3" @submit.prevent="createKegiatan">
                             <div class="md:flex md:items-center mb-6">
                                 <div class="md:w-1/4">
                                     <label
                                         class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                                        for="inline-full-name"
+                                        for="namaKegiatan"
                                     >
                                         Nama Kegiatan
                                     </label>
@@ -82,9 +82,10 @@
                                 <div class="md:w-3/4">
                                     <input
                                         class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
-                                        id="inline-full-name"
+                                        id="namaKegiatan"
                                         type="text"
                                         placeholder="Masukkan nama event"
+                                        v-model="formData.nama"
                                     />
                                 </div>
                             </div>
@@ -92,16 +93,18 @@
                                 <div class="md:w-1/4">
                                     <label
                                         class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                                        for="inline-full-name"
+                                        for="kategori"
                                     >
                                         Kategori
                                     </label>
                                 </div>
-                                <div class="inline-block relative w-64">
+                                <div id="v-model-select-dynamic" class="inline-block relative w-64">
                                     <select
                                         class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                        id="kategori"
+                                        v-model="formData.kategori"
                                     >
-                                        <option disabled selected>
+                                        <option disabled value="">
                                             Pilih kategori
                                         </option>
                                         <option
@@ -109,6 +112,7 @@
                                                 kategori, index
                                             ) in dataKategori"
                                             :key="index"
+                                            :value="kategori.nama"
                                         >
                                             {{ kategori.nama }}
                                         </option>
@@ -132,7 +136,7 @@
                                 <div class="md:w-1/4">
                                     <label
                                         class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                                        for="inline-full-name"
+                                        for="tanggal"
                                     >
                                         Tanggal
                                     </label>
@@ -141,7 +145,8 @@
                                     <litepie-datepicker
                                         as-single
                                         :formatter="formatter"
-                                        v-model="dateValue"
+                                        id="tanggal"
+                                        v-model="formData.tanggal"
                                     ></litepie-datepicker>
                                 </div>
                             </div>
@@ -149,7 +154,7 @@
                                 <div class="md:w-1/4">
                                     <label
                                         class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                                        for="inline-full-name"
+                                        for="maxPeserta"
                                     >
                                         Max Peserta
                                     </label>
@@ -158,6 +163,7 @@
                                     class="flex flex-row h-10 w-40 rounded-lg relative bg-transparent mt-1"
                                 >
                                     <button
+                                        type="button"
                                         @click="decreaseNumber"
                                         class="bg-gray-300 text-black hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
                                     >
@@ -168,10 +174,11 @@
                                     <input
                                         type="text"
                                         class="outline-none focus:outline-none text-center w-full bg-gray-200 appearance-none border-2 border-gray-200 rounded font-semibold text-md hover:text-black focus:text-black md:text-basecursor-default flex items-center text-gray-700 mx-2"
-                                        name="custom-input-number"
-                                        v-bind:value="maxPeserta"
+                                        id="maxPeserta"
+                                        v-model="formData.maksPeserta"
                                     />
                                     <button
+                                        type="button"
                                         @click="increaseNumber"
                                         class="bg-gray-300 text-black hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
                                     >
@@ -191,53 +198,35 @@
                                     </label>
                                 </div>
                                 <div class="inline-block relative w-64">
-                                    <select
-                                        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-                                    >
-                                        <option disabled selected>
-                                            Pilih pemateri
-                                        </option>
-                                        <option
-                                            v-for="(
-                                                pemateri, index
-                                            ) in dataPemateri"
-                                            :key="index"
-                                        >
-                                            {{ pemateri.nama }}
-                                        </option>
-                                    </select>
-                                    <div
-                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-                                    >
-                                        <svg
-                                            class="fill-current h-4 w-4"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20"
-                                        >
-                                            <path
-                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                                            />
-                                        </svg>
+                                    <div>
+                                    <Multiselect
+                                        v-model="formData.pemateri"
+                                        mode="tags"
+                                        :searchable="true"
+                                        :createTag="true"
+                                        :options="multiselectData"
+                                        placeholder="Pilih pemateri"
+                                    />
                                     </div>
                                 </div>
                             </div>
-                        </form>
 
-                        <!--Footer-->
-                        <div class="flex justify-end pt-2">
-                            <button
-                                @click="open = false"
-                                class="px-6 py-3 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
-                            >
-                                Close
-                            </button>
-                            <button
-                                @click="open = false"
-                                class="px-6 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500"
-                            >
-                                Action
-                            </button>
-                        </div>
+                            <!--Footer-->
+                            <div class="flex justify-end pt-2">
+                                <button
+                                    type="button"
+                                    @click="open = false"
+                                    class="px-6 py-3 bg-transparent p-3 rounded-lg text-indigo-500 hover:bg-gray-100 hover:text-indigo-400 mr-2"
+                                >
+                                    Tutup
+                                </button>
+                                <button
+                                    class="px-6 py-3 bg-indigo-600 rounded-md text-white font-medium tracking-wide hover:bg-indigo-500"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </form>                        
                     </div>
                 </div>
             </div>
@@ -409,11 +398,14 @@
 
 <script>
 import axios from 'axios';
-import { defineComponent, ref, onMounted, reactive } from 'vue';
+import { defineComponent, ref, onMounted, reactive} from 'vue';
 import LitepieDatepicker from 'litepie-datepicker';
+import Multiselect from '@vueform/multiselect'
+
 export default defineComponent({
     components: {
-        LitepieDatepicker
+        LitepieDatepicker,
+        Multiselect
     },
     setup() {
         const acara = reactive({
@@ -438,23 +430,9 @@ export default defineComponent({
             dataAcara.value = data;
         };
 
-        onMounted(() => {
-            getDataAcara();
-        });
-
         const kategori = reactive({
             id: null,
-            nama: '',
-            tanggal: '',
-            maksPeserta: '',
-            pemateri: [
-                {
-                    id: null,
-                    nama: '',
-                    foto: ''
-                }
-            ],
-            kategori: ''
+            nama: ''
         });
 
         const dataKategori = ref([kategori]);
@@ -463,10 +441,6 @@ export default defineComponent({
             let { data } = await axios.get('/kategori');
             dataKategori.value = data;
         };
-
-        onMounted(() => {
-            getDataKategori();
-        });
 
         const pemateri = reactive({
             id: null,
@@ -477,48 +451,90 @@ export default defineComponent({
 
         const dataPemateri = ref([pemateri]);
 
+        const multiselect = reactive({
+            value: '',
+            label: '',
+        });
+
+        const multiselectData = ref([multiselect])
+
         const getDataPemateri = async () => {
             let { data } = await axios.get('/pemateri');
             dataPemateri.value = data;
+            multiselectData.value = modifyKey(dataPemateri.value)
         };
 
+        // const deleteKey = ( obj, key) => {
+        //     delete obj[key];
+        // }
+
+        function renameKey ( obj, oldKey, newKey ) {
+            obj[newKey] = obj[oldKey];
+            delete obj[oldKey];
+        }
+
+        const modifyKey = ( data ) => {
+            // const arr = JSON.parse(data);
+            data.forEach( obj => renameKey( obj, 'id', 'value' ) );
+            data.forEach( obj => renameKey( obj, 'nama', 'label' ) );
+            // const updatedJson = JSON.stringify( data );
+            // console.log("ini data abis rename" + updatedJson );
+            return data
+        }
+
         onMounted(() => {
+            getDataAcara();
+            getDataKategori();
             getDataPemateri();
         });
 
-        const maxPeserta = ref(0);
-
         const increaseNumber = () => {
-            maxPeserta.value++;
+            formData.maksPeserta++;
         };
 
         const decreaseNumber = () => {
-            if (maxPeserta.value > 0) maxPeserta.value--;
+            if (maxPeserta.value > 0) formData.maksPeserta--;
         };
 
         const open = ref(false);
-        const dateValue = ref([]);
+        // const dateValue = ref([]);
         const formatter = reactive({
           date: 'DD MMM YYYY',
           month: 'MMM'
         })
 
+        const formData = reactive({
+            nama: '',
+            tanggal: '',
+            maksPeserta: 0,
+            pemateri: [],
+            kategori: ''
+        });
+
+        const createKegiatan = async () => {
+          await axios.post('/event', formData)
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
+        };
+
         return {
             dataAcara,
             dataKategori,
             dataPemateri,
-            maxPeserta,
             increaseNumber,
             decreaseNumber,
             open,
-            dateValue,
-            formatter
+            formatter,
+            formData,
+            multiselect,
+            multiselectData,
+            createKegiatan
         };
     }
 });
 </script>
 
-<style>
+<style src="@vueform/multiselect/themes/default.css">
 .modal {
     transition: opacity 0.25s ease;
 }
