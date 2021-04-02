@@ -26,7 +26,7 @@
                 ></div>
 
                 <div
-                    class="modal-container fixed bg-white w-1/8 md:w-1/3 sm:w-1/7 mx-auto h-1/7 xl:h-1/2 md:h-1/3 sm:h-1/4 rounded shadow-lg z-50 overflow-y-auto"
+                    class="modal-container fixed bg-white w-1/8 md:w-1/3 sm:w-1/7 mx-auto h-auto rounded shadow-lg z-50 overflow-y-auto"
                 >
                     <div
                         class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50"
@@ -398,7 +398,7 @@
 
 <script>
 import axios from 'axios';
-import { defineComponent, ref, onMounted, reactive} from 'vue';
+import { defineComponent, ref, onMounted, reactive, onUpdated} from 'vue';
 import LitepieDatepicker from 'litepie-datepicker';
 import Multiselect from '@vueform/multiselect'
 
@@ -515,7 +515,14 @@ export default defineComponent({
           await axios.post('/event', formData)
             .then(response => console.log(response))
             .catch(error => console.log(error))
+            open.value = false
+            getDataAcara();
+            // window.location.reload()
         };
+
+        // onUpdated(() => {
+        //     getDataAcara();
+        // })
 
         return {
             dataAcara,

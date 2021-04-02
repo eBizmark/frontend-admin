@@ -41,7 +41,7 @@
       </div>
 
       <nav class="mt-10">
-        <router-link
+        <!-- <router-link
           class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
           :class="[$route.name === 'Dashboard' ? activeClass : inactiveClass]"
           to="/dashboard"
@@ -63,7 +63,7 @@
           </svg>
 
           <span class="mx-4">Dashboard</span>
-        </router-link>
+        </router-link> -->
 
         <router-link
           class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
@@ -283,7 +283,7 @@
           <span class="mx-4">Pemateri</span>
         </router-link>
 
-        <router-link
+        <!-- <router-link
           class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
           :class="[$route.name === 'UIElements' ? activeClass : inactiveClass]"
           to="/ui-elements"
@@ -407,7 +407,7 @@
           </svg>
 
           <span class="mx-4">Blank</span>
-        </router-link>
+        </router-link> -->
       </nav>
     </div>
   </div>

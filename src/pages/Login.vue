@@ -21,7 +21,7 @@
             fill="white"
           />
         </svg>
-        <span class="text-gray-700 font-semibold text-2xl">V-Dashboard</span>
+        <span class="text-gray-700 font-semibold text-2xl">e-BizMark</span>
       </div>
 
       <form class="mt-4" @submit.prevent="login">
@@ -80,11 +80,11 @@ import { useRouter } from "vue-router";
 export default{
   setup() {
     const router = useRouter();
-    const email = ref("johndoe@mail.com");
+    const email = ref("ebizmark.admin@mail.com");
     const password = ref("@#!@#asdf1231!_!@#");
 
     function login() {
-      router.push("/dashboard");
+      router.push("/events");
     }
 
     return {
