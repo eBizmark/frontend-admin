@@ -16,6 +16,7 @@ import Login from "@/pages/Login.vue";
 import Modal from "@/pages/Modal.vue";
 import Card from "@/pages/Card.vue";
 import Blank from "@/pages/Blank.vue";
+import CreateEvent from "@/pages/Events/Create.vue";
 const routes = [
     {
         path: "/",
@@ -32,6 +33,11 @@ const routes = [
         path: "/events",
         name: "Events",
         component: Events,
+      },
+      {
+        path: "/events/create",
+        name: "CreateEvent",
+        component: CreateEvent,
       },
       {
         path: "/participants",
