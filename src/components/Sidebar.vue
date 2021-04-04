@@ -34,9 +34,7 @@
             />
           </svg>
 
-          <span class="text-white text-2xl mx-2 font-semibold"
-            >e-BizMark</span
-          >
+          <span class="text-white text-2xl mx-2 font-semibold">e-BizMark</span>
         </div>
       </div>
 
@@ -99,7 +97,9 @@
 
         <router-link
           class="flex items-center duration-200 mt-4 py-2 px-6 border-l-4"
-          :class="[$route.name === 'Participants' ? activeClass : inactiveClass]"
+          :class="[
+            $route.name === 'Participants' ? activeClass : inactiveClass,
+          ]"
           to="/participants"
         >
           <svg
@@ -414,24 +414,24 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
-import { useSidebar } from "../hooks/useSidebar";
+import { defineComponent, ref } from 'vue'
+import { useSidebar } from '../hooks/useSidebar'
 
-export default{
+export default {
   setup() {
-    const { isOpen } = useSidebar();
+    const { isOpen } = useSidebar()
     const activeClass = ref(
-      "bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100"
-    );
+      'bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100'
+    )
     const inactiveClass = ref(
-      "border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100"
-    );
+      'border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'
+    )
 
     return {
       isOpen,
       activeClass,
       inactiveClass,
-    };
+    }
   },
 }
 </script>
