@@ -164,7 +164,8 @@ import axios from 'axios'
 import { defineComponent, ref, reactive, onMounted } from 'vue'
 import LitepieDatepicker from 'litepie-datepicker'
 import Multiselect from '@vueform/multiselect'
-import router from '@/router'
+// import router from '@/router'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   components: {
@@ -246,12 +247,15 @@ export default defineComponent({
       kategori: '',
     })
 
+    const router = useRouter()
+
     const createKegiatan = async () => {
       await axios
         .post('/event', formData)
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
-      router.push({ name: 'Events' })
+      // await router.push({ name: 'Events' })
+      await router.push('/events')
       // window.location.reload()
     }
 
