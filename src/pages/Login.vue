@@ -24,13 +24,14 @@
         <span class="text-gray-700 font-semibold text-2xl">e-BizMark</span>
       </div>
 
-      <form class="mt-4" @submit.prevent="login">
+      <form class="mt-4" @submit.prevent="submit">
         <label class="block">
           <span class="text-gray-700 text-sm">Email</span>
           <input
-            type="email"
+            type="text"
             class="form-input mt-1 block w-full rounded-md focus:border-indigo-600"
-            v-model="email"
+            v-model="account.email"
+            placeholder="email"
           />
         </label>
 
@@ -39,7 +40,8 @@
           <input
             type="password"
             class="form-input mt-1 block w-full rounded-md focus:border-indigo-600"
-            v-model="password"
+            v-model="account.password"
+            placeholder="password"
           />
         </label>
 
@@ -74,24 +76,47 @@
 </template>
 
 <script>
-import  {ref } from "vue";
-import { useRouter } from "vue-router";
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
-export default{
+export default {
   setup() {
-    const router = useRouter();
-    const email = ref("ebizmark.admin@mail.com");
-    const password = ref("@#!@#asdf1231!_!@#");
+    const account = reactive({
+      email: '',
+      password: '',
+    })
+    const router = useRouter()
+    // const email = ref('ebizmark.admin@mail.com')
+    // const password = ref('@#!@#asdf1231!_!@#')
+    const store = useStore()
 
-    function login() {
-      router.push("/events");
+    // const submit = async () => {
+    //   let auth = false
+    //   await axios
+    //     .post('auth/login', account)
+    //     .then((response) => {
+    //       // console.log(response)
+    //       auth = response.data.auth
+    //     })
+    //     .catch((error) => console.log(error))
+    //   // console.log(account)
+    //   if (auth) {
+    //     const status = (auth) => store.dispatch('setAuthentication', auth)
+    //     // console.log('cek store ' + status)
+    //     await router.push('/events')
+    //   } else await router.push('/')
+    // }
+
+    const submit = () => {
+      store.dispatch('user/setAuthentication', account)
+      router.push('/events')
     }
 
     return {
-      login,
-      email,
-      password,
-    };
+      account,
+      submit,
+    }
   },
 }
 </script>

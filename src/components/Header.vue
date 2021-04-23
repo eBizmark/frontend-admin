@@ -42,6 +42,7 @@
           placeholder="Search"
         />
       </div>
+      Hi {{ admin }}
     </div>
 
     <div class="flex items-center">
@@ -106,17 +107,26 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import { useSidebar } from "../hooks/useSidebar";
+import {useStore} from 'vuex'
 
 export default{
   setup(_, { emit }) {
     const dropdownOpen = ref(false);
     const { isOpen } = useSidebar();
+    const store = useStore()
+
+    // const admin = computed(() => store.getters['user/getUser'])
+    // const admin = computed(() => store.state.user.user)
+
+    // console.log(admin)
 
     return {
       isOpen,
       dropdownOpen,
+      admin: computed(() => store.getters['user/getUser']),
+      // admin
     };
   },
 }
