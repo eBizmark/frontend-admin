@@ -9,6 +9,13 @@ import App from '@/App.vue'
 import DashboardLayout from '@/components/DashboardLayout.vue'
 // import EmptyLayout from '@/components/EmptyLayout.vue'
 
+// require('./store/subscriber.js')
+import('./store/subscriber.js')
+
+// to do: make just one
+store.dispatch('admin/attempt', localStorage.getItem('admin_token')).then(() => console.log("no token"))
+store.dispatch('admin/attempt_user', localStorage.getItem('admin_email')).then(() => console.log("no email"))
+
 const app = createApp(App)
 app
     .component('default-layout', DashboardLayout)

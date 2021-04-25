@@ -1,11 +1,11 @@
 import {createLogger, createStore} from "vuex";
-import user from './modules/admin';
+import admin from './modules/admin';
 
 const debug = process.env.NODE_ENV !== 'production'
 
 export default createStore({
     modules: {
-        user
+        admin
     },
     strict: debug,
     plugins: debug ? [createLogger()] : []

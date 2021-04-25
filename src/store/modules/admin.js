@@ -34,16 +34,18 @@ const actions = {
     //         })
     //         .catch((error) => console.log(error))
     // }
-    async setAuthentication({commit}, payload) {
+    async setAuthentication({dispatch}, payload) {
         let response = await axios.post('auth/login', payload)
 
         // console.log(response.data)
         // const data = {
         //     token: response.data.accessToken,
-        //     email: credentials.email
+        //     email: payload.email
         // }
-        await commit('SET_USER', payload.email)
-        await commit('SET_TOKEN', response.data.accessToken)
+
+        dispatch('attempt_user', payload.email)
+
+        return dispatch('attempt', response.data.accessToken)
         // await console.log(getters.getUser(state))
 
         // setTimeout(function(){
@@ -58,13 +60,15 @@ const actions = {
 
     },
 
-    // attempt({commit}, data) {
-    //     commit('SET_TOKEN', data.token)
-    //
-    //     commit('SET_USER', data.email)
-    //     console.log(data.email)
-    //
-    //     window.location.replace('/events')
+    async attempt({commit}, data) {
+        // console.log(data.token)
+        await commit('SET_TOKEN', data)
+
+
+        // commit('SET_USER', data.email)
+        // console.log(data.email)
+        //
+        // window.location.replace('/events')
         // try {
         //     let response = await axios.get('auth/me', {
         //         headers: {
@@ -77,7 +81,29 @@ const actions = {
         //     commit('SET_TOKEN', null)
         //     commit('SET_USER', null)
         // }
-    // }
+    },
+
+    async attempt_user({commit}, data) {
+        // console.log(data.token)
+
+        await commit('SET_USER', data)
+        // commit('SET_USER', data.email)
+        // console.log(data.email)
+        //
+        // window.location.replace('/events')
+        // try {
+        //     let response = await axios.get('auth/me', {
+        //         headers: {
+        //             'Authorization': token
+        //         }
+        //     })
+        //
+        //     commit('SET_USER', response.data)
+        // } catch (e) {
+        //     commit('SET_TOKEN', null)
+        //     commit('SET_USER', null)
+        // }
+    }
 };
 const getters = {
     // isAuthenticated(state) {

@@ -125,7 +125,7 @@ export default{
     return {
       isOpen,
       dropdownOpen,
-      admin: computed(() => store.getters['user/getUser']),
+      admin: computed(() => store.getters['admin/getUser']),
       // admin
     };
   },

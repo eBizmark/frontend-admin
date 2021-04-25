@@ -109,8 +109,11 @@ export default {
     // }
 
     const submit = () => {
-      store.dispatch('user/setAuthentication', account)
-      router.push('/events')
+      store.dispatch('admin/setAuthentication', account).then(() => {
+        router.push('/events')
+      }).catch(() => {
+        console.log("login failed")
+      })
     }
 
     return {
