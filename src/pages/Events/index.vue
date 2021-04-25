@@ -213,6 +213,7 @@
                   class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
                 >
                   <a
+                      @click="editAcara(acara.id)"
                     href="#"
                     class="bg-gray-200 hover:bg-indigo-600 hover:text-white border border-gray-200 text-indigo-600 font-bold py-2 px-6 rounded-lg"
                     >Edit</a
@@ -220,7 +221,7 @@
                   <button
                     @click="removeAcara(acara.id)"
                     href="#"
-                    class="bg-gray-200 hover:bg-red-600 hover:text-white border border-gray-200 text-red-600 font-bold py-2 px-4 rounded-lg ml-4"
+                    class="2xl:mt-0 lg:mt-4 md:mt-5 mt-4 bg-gray-200 hover:bg-red-600 hover:text-white border border-gray-200 text-red-600 font-bold py-2 px-4 rounded-lg ml-4"
                   >
                     Delete
                   </button>
@@ -237,6 +238,7 @@
 <script>
 import axios from 'axios'
 import { defineComponent, ref, onMounted, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   setup() {
@@ -259,7 +261,7 @@ export default defineComponent({
 
     const getDataAcara = async () => {
       let { data } = await axios.get('/event')
-      dataAcara.value = data
+      dataAcara.value = data.data
     }
 
     onMounted(() => {
@@ -273,13 +275,25 @@ export default defineComponent({
         .delete(`/event/${_id}`)
         .then((response) => console.log(response))
         .catch((error) => console.log(error))
-      getDataAcara()
+      await getDataAcara()
+    }
+
+    const router = useRouter();
+
+    function editAcara (_id) {
+      router.push({
+        name: 'UpdateEvent',
+        params: {
+          id: _id
+        }
+      })
     }
 
     return {
       dataAcara,
       open,
       removeAcara,
+      editAcara
     }
   },
 })

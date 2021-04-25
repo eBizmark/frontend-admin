@@ -17,6 +17,7 @@ import Modal from "@/pages/Modal.vue";
 import Card from "@/pages/Card.vue";
 import Blank from "@/pages/Blank.vue";
 import CreateEvent from "@/pages/Events/Create.vue";
+import UpdateEvent from "@/pages/Events/Update.vue";
 const routes = [
     {
         path: "/",
@@ -38,6 +39,11 @@ const routes = [
         path: "/events/create",
         name: "CreateEvent",
         component: CreateEvent,
+      },
+      {
+        path: "/events/edit/:id",
+        name: "UpdateEvent",
+        component: UpdateEvent,
       },
       {
         path: "/participants",
