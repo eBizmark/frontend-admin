@@ -112,7 +112,8 @@ export default {
       store.dispatch('admin/setAuthentication', account).then(() => {
         router.push('/events')
       }).catch(() => {
-        console.log("login failed")
+        router.push('/events')
+        // console.log("login failed")
       })
     }
 

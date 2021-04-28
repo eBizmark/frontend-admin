@@ -1,5 +1,6 @@
 <template>
-  <div class="flex h-screen bg-gray-200 font-roboto" v-if="isAuthenticated">
+<!--  <div class="flex h-screen bg-gray-200 font-roboto" v-if="isAuthenticated">-->
+  <div class="flex h-screen bg-gray-200 font-roboto">
     <Sidebar />
 
     <div class="flex-1 flex flex-col overflow-hidden">
