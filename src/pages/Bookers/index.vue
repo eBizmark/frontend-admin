@@ -59,8 +59,8 @@
                 </td>
                 <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
-                    <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ pemesan.nama }}
+                    <div class="text-sm leading- font-medium text-gray-900">
+                        {{ pemesan.namaLengkap }}
                       </div>
                   </div>
                 </td>
@@ -74,14 +74,14 @@
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ pemesan.tglLahir }}
+                        {{ pemesan.tanggalLahir }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ pemesan.noHP }}
+                        {{ pemesan.noHp }}
                       </div>
                   </div>
                 </td>
@@ -119,9 +119,9 @@ export default defineComponent({
   setup() {
     const pemesan = reactive({
         "id": null,
-        "nama": "",
+        "namaLengkap": "",
         "email": "",
-        "tglLahir": "",
+        "tanggalLahir": "",
         "noHP": "",
         "domisili": "",
         "referalCode": "",
@@ -130,7 +130,7 @@ export default defineComponent({
                 "nama": "",
                 "email": "",
                 "tglLahir": "",
-                "noHP": "",
+                "noHp": "",
                 "domisili": ""
             }]
     });
@@ -139,6 +139,7 @@ export default defineComponent({
 
     const getDataPemesan = async()=>{
       let { data } = await axios.get("/pemesan");
+      console.log(data)
       dataPemesan.value = data;
     }
 

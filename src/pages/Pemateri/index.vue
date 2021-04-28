@@ -246,6 +246,7 @@ export default defineComponent({
 
     const getDataPemateri = async()=>{
       let { data } = await axios.get("/pemateri");
+      console.log(data)
       dataPemateri.value = data;
     }
 

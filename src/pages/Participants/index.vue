@@ -67,7 +67,7 @@
                 <td class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.nama }}
+                        {{ peserta.namaLengkap }}
                       </div>
                   </div>
                 </td>
@@ -81,14 +81,14 @@
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.tglLahir }}
+                        {{ peserta.tanggalLahir }}
                       </div>
                   </div>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                        {{ peserta.noHP }}
+                        {{ peserta.noHp }}
                       </div>
                   </div>
                 </td>
@@ -118,10 +118,10 @@ export default defineComponent({
   setup() {
     const peserta = reactive({
         "id": null,
-        "nama": "",
+        "namaLengkap": "",
         "email": "",
-        "tglLahir": "",
-        "noHP": "",
+        "tanggalLahir": "",
+        "noHp": "",
         "domisili": ""
     });
 
@@ -129,6 +129,7 @@ export default defineComponent({
 
     const getDataPeserta = async()=>{
       let { data } = await axios.get("/peserta");
+      console.log(data)
       dataPeserta.value = data;
     }
 

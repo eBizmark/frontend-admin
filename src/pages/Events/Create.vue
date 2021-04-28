@@ -39,13 +39,13 @@
           <select
               class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="kategori"
-              v-model="formData.kategori"
+              v-model="formData.idKategori"
           >
             <option disabled value="">Pilih kategori</option>
             <option
                 v-for="(kategori, index) in dataKategori"
                 :key="index"
-                :value="kategori.nama"
+                :value="kategori.id"
             >
               {{ kategori.nama }}
             </option>
@@ -182,7 +182,7 @@ export default defineComponent({
 
     const getDataKategori = async () => {
       let { data } = await axios.get('/kategori')
-      dataKategori.value = data.data
+      dataKategori.value = data
     }
 
     const pemateri = reactive({
@@ -203,7 +203,7 @@ export default defineComponent({
 
     const getDataPemateri = async () => {
       let { data } = await axios.get('/pemateri')
-      dataPemateri.value = data.data
+      dataPemateri.value = data
       // console.log(dataPemateri.value)
       multiselectData.value = modifyKey(dataPemateri.value)
     }
@@ -214,6 +214,7 @@ export default defineComponent({
     }
 
     const modifyKey = (data) => {
+      // console.log("ini data" + data );
       // const arr = JSON.parse(data);
       data.forEach((obj) => renameKey(obj, 'id', 'value'))
       data.forEach((obj) => renameKey(obj, 'nama', 'label'))
@@ -236,21 +237,26 @@ export default defineComponent({
     }
 
     const formatter = reactive({
-      date: 'DD MMM YYYY',
-      month: 'MMM',
+      date: 'YYYY-MM-DD',
+      month: 'MM',
     })
+
+    // const convertDate = (data) => {
+    //   let newDate = new Date(data);
+    // }
 
     const formData = reactive({
       nama: '',
       tanggal: '',
       maksPeserta: 0,
       pemateri: [],
-      kategori: '',
+      idKategori: '',
     })
 
     const router = useRouter()
 
     const createKegiatan = async () => {
+      // formData.kategori = 1
       await axios
           .post('/event', formData)
           .then((response) => console.log(response))

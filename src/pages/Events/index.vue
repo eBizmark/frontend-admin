@@ -157,7 +157,7 @@
                 >
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
-                      {{ acara.kategori }}
+                      {{ acara.kategori.nama }}
                     </div>
                   </div>
                 </td>
@@ -261,7 +261,8 @@ export default defineComponent({
 
     const getDataAcara = async () => {
       let { data } = await axios.get('/event')
-      dataAcara.value = data.data
+      console.log(data)
+      dataAcara.value = data
     }
 
     onMounted(() => {

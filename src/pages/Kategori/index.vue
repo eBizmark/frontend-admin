@@ -89,6 +89,27 @@
               </div>
             </div>
 
+            <div class="md:flex md:items-center mb-6">
+              <div class="md:w-1/4">
+                <label
+                    class="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+                    for="deskripsi"
+                >
+                  Deskripsi
+                </label>
+              </div>
+              <div class="md:w-3/4">
+                <textarea
+                    class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-indigo-500"
+                    id="deskripsi"
+                    type="text"
+                    placeholder="Masukkan deskripsi"
+                    v-model="formData.deskripsi"
+                >
+                </textarea>
+              </div>
+            </div>
+
             <!--Footer-->
             <div class="flex justify-end pt-2 px-9">
               <button
@@ -129,6 +150,11 @@
                 >
                   Nama Seminar
                 </th>
+                <th
+                    class="pr-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Deskripsi
+                </th>
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
               </tr>
             </thead>
@@ -149,6 +175,15 @@
                   <div class="flex items-center">
                     <div class="text-sm leading-5 font-medium text-gray-900">
                       {{ kategori.nama }}
+                    </div>
+                  </div>
+                </td>
+                <td
+                    class="pr-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                >
+                  <div class="flex items-center">
+                    <div class="text-sm leading-5 font-medium text-gray-900">
+                      {{ kategori.deskripsi }}
                     </div>
                   </div>
                 </td>
@@ -183,22 +218,14 @@ export default defineComponent({
     const kategori = reactive({
       id: null,
       nama: '',
-      tanggal: '',
-      maksPeserta: '',
-      pemateri: [
-        {
-          id: null,
-          nama: '',
-          foto: '',
-        },
-      ],
-      kategori: '',
+      deskripsi: ''
     })
 
     const dataKategori = ref([kategori])
 
     const getDataKategori = async () => {
       let { data } = await axios.get('/kategori')
+      console.log(data)
       dataKategori.value = data
     }
 
