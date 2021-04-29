@@ -249,13 +249,30 @@ export default defineComponent({
       nama: '',
       tanggal: '',
       maksPeserta: 0,
-      pemateri: [],
+      pemateri: [{
+        id: null
+      }],
       idKategori: '',
     })
+
+    function convertToArrayOfObjects(data) {
+      let i = 0
+      let output = []
+
+      for (i = 0; i < data.length; i++) {
+        let pemateri = {id: null}
+        pemateri.id = data[i];
+
+        output.push(pemateri);
+      }
+
+      return output;
+    }
 
     const router = useRouter()
 
     const createKegiatan = async () => {
+      formData.pemateri = convertToArrayOfObjects(formData.pemateri)
       // formData.kategori = 1
       await axios
           .post('/event', formData)
