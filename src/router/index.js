@@ -18,6 +18,7 @@ import Card from "@/pages/Card.vue";
 import Blank from "@/pages/Blank.vue";
 import CreateEvent from "@/pages/Events/Create.vue";
 import UpdateEvent from "@/pages/Events/Update.vue";
+import CreateKategori from "@/pages/Kategori/Create.vue";
 const routes = [
     {
         path: "/",
@@ -59,6 +60,11 @@ const routes = [
         path: "/categories",
         name: "Kategori",
         component: Kategori,
+      },
+      {
+        path: "/categories/create",
+        name: "CreateKategori",
+        component: CreateKategori,
       },
       {
         path: "/transactions",
