@@ -20,9 +20,9 @@
         </div>
         <input
             class="inline-block relative w-64 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="namaKegiatan"
+            id="namaKategori"
             type="text"
-            placeholder="Masukkan nama event"
+            placeholder="Masukkan nama kategori"
             v-model="formData.nama"
         />
       </div>
