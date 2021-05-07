@@ -19,6 +19,7 @@ import Blank from "@/pages/Blank.vue";
 import CreateEvent from "@/pages/Events/Create.vue";
 import UpdateEvent from "@/pages/Events/Update.vue";
 import CreateKategori from "@/pages/Kategori/Create.vue";
+import CreatePemateri from "@/pages/Pemateri/Create.vue";
 const routes = [
     {
         path: "/",
@@ -90,6 +91,11 @@ const routes = [
         path: "/pemateri",
         name: "Pemateri",
         component: Pemateri,
+      },
+      {
+        path: "/pemateri/create",
+        name: "CreatePemateri",
+        component: CreatePemateri,
       },
       {
         path: "/forms",
