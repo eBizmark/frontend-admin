@@ -67,7 +67,7 @@
                   <div class="flex items-center">
                     <div class="flex-shrink-0 w-20 h-15">
                       <a href="#">
-                        <div @click="openImage(pemateri.foto)">
+                        <div @click="openImage('//localhost:5000'+pemateri.foto)">
                           <img
                             class="w-full h-full rounded-full"
                             :src="'//localhost:5000'+pemateri.foto"
