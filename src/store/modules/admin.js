@@ -43,7 +43,7 @@ const actions = {
         //     email: payload.email
         // }
 
-        dispatch('attempt_user', payload.email)
+        dispatch('attempt_user', payload.username)
 
         return dispatch('attempt', response.data.accessToken)
         // await console.log(getters.getUser(state))

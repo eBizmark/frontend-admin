@@ -15,9 +15,9 @@ store.subscribe((mutation => {
             break;
         case 'admin/SET_USER':
             if(mutation.payload) {
-                localStorage.setItem('admin_email', mutation.payload)
+                localStorage.setItem('admin_username', mutation.payload)
             } else {
-                localStorage.removeItem('admin_email')
+                localStorage.removeItem('admin_username')
             }
     }
 }))
