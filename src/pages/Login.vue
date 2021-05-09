@@ -26,12 +26,12 @@
 
       <form class="mt-4" @submit.prevent="submit">
         <label class="block">
-          <span class="text-gray-700 text-sm">Email</span>
+          <span class="text-gray-700 text-sm">Username</span>
           <input
             type="text"
             class="form-input mt-1 block w-full rounded-md focus:border-indigo-600"
-            v-model="account.email"
-            placeholder="email"
+            v-model="account.username"
+            placeholder="username"
           />
         </label>
 
@@ -83,7 +83,7 @@ import { useStore } from 'vuex'
 export default {
   setup() {
     const account = reactive({
-      email: '',
+      username: '',
       password: '',
     })
     const router = useRouter()
@@ -112,8 +112,8 @@ export default {
       store.dispatch('admin/setAuthentication', account).then(() => {
         router.push('/events')
       }).catch(() => {
-        router.push('/events')
-        // console.log("login failed")
+        // router.push('/events')
+        console.log("login failed")
       })
     }
 
