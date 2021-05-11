@@ -95,10 +95,11 @@
             class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >Products</a
           >
-          <router-link
-            to="/"
+          <button
+            type="button"
+            @click="deleteToken"
             class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
-            >Log out</router-link
+            >Log out</button
           >
         </div>
       </div>
@@ -110,13 +111,23 @@
 import { defineComponent, ref, computed } from "vue";
 import { useSidebar } from "../hooks/useSidebar";
 import {useStore} from 'vuex'
+import {useRouter} from "vue-router";
 
 export default{
   setup(_, { emit }) {
     const dropdownOpen = ref(false);
     const { isOpen } = useSidebar();
     const store = useStore()
+    const router = useRouter()
 
+    const deleteToken = () => {
+      store.dispatch('admin/removeToken').then(() => {
+        router.push('/')
+      }).catch(() => {
+        // router.push('/events')
+        console.log("logout gagal")
+      })
+    }
     // const admin = computed(() => store.getters['user/getUser'])
     // const admin = computed(() => store.state.user.user)
 
@@ -126,6 +137,7 @@ export default{
       isOpen,
       dropdownOpen,
       admin: computed(() => store.getters['admin/getUser']),
+      deleteToken
       // admin
     };
   },

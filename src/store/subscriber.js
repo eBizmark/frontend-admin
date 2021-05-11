@@ -19,5 +19,10 @@ store.subscribe((mutation => {
             } else {
                 localStorage.removeItem('admin_username')
             }
+            break;
+        case 'admin/REMOVE_TOKEN':
+            localStorage.removeItem('admin_token')
+            localStorage.removeItem('admin_username')
+            break;
     }
 }))

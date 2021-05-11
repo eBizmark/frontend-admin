@@ -13,6 +13,11 @@ const mutations = {
     SET_USER (state, data) {
         state.user = data
         // window.location.replace('/events')
+    },
+
+    REMOVE_TOKEN (state) {
+      state.token = null
+        state.user = ''
     }
 };
 const actions = {
@@ -58,6 +63,10 @@ const actions = {
 
         // await window.location.replace('/events')
 
+    },
+
+    async removeToken({commit}) {
+        await commit('REMOVE_TOKEN')
     },
 
     async attempt({commit}, data) {
