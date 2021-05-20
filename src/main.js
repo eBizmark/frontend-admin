@@ -6,8 +6,8 @@ import store from "./store";
 // Untuk State Management Store pake tutorial : https://youtu.be/a8s7Vx0oMmI?t=179
 // Bakal mirip kaya Nuthink dulu
 import App from '@/App.vue'
-import DashboardLayout from '@/components/DashboardLayout.vue'
-// import EmptyLayout from '@/components/EmptyLayout.vue'
+import layouts from './layout'
+
 
 // require('./store/subscriber.js')
 import('./store/subscriber.js')
@@ -18,8 +18,7 @@ store.dispatch('admin/attempt_user', localStorage.getItem('admin_username')).the
 
 const app = createApp(App)
 app
-    .component('default-layout', DashboardLayout)
-    // .component('empty-layout', EmptyLayout)
+    .use(layouts)
     .use(router)
     .use(http)
     .use(store)

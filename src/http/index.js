@@ -2,7 +2,7 @@ import axios from 'axios';
 
 axios.defaults.headers.get['Accept'] = 'application/json'
 axios.defaults.headers.post['Accept'] = 'application/json'
-axios.defaults.baseURL = 'http://localhost:5000/api/v1'
+axios.defaults.baseURL = 'https://api-ebizmark.irvankdhf.xyz/api/v1'
 
 export default (app) => {
     app.axios = axios;
