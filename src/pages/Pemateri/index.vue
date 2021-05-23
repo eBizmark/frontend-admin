@@ -70,7 +70,7 @@
                         <div @click="openImage('//localhost:5000'+pemateri.foto)">
                           <img
                             class="w-full h-full rounded-full"
-                            :src="'//localhost:5000'+pemateri.foto"
+                            :src="'//api-ebizmark.irvankdhf.xyz'+pemateri.foto"
                             alt
                           />
                         </div>
